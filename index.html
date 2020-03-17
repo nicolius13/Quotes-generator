@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <title>Générateur de citations</title>
+  </head>
+  <body>
+    <div id="app" class="h-100">
+      <transition name="fade" appear mode="out-in">
+        <div class="h-100" :key="color" :style="bgColor">
+          <div class="container h-100">
+            <div class="row h-100 align-items-center">
+              <div class="col-10 mx-auto text-center">
+                <div v-if="!showQuotes" class="quotes-box" :style="textColor">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="numberQuotes">Nombre de citations</label>
+                        <select v-model="numQuotes" class="form-control" id="numberQuotes">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="quoteType">Type de citations</label>
+                        <select v-model="quotesType" class="form-control" id="quoteType">
+                          <option>Van Damme</option>
+                          <option>Aléatoire</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-sm-right">
+                      <button id="new-quote" class="btn" :style="bgColor" @click="generateQuotes">
+                        Générer les citations
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-else class="quotes-box" :style="textColor">
+                  <div class="row">
+                    <div class="col">
+                      <div v-for="(quote, index) in quotes">
+                        <h4>Citation {{ index + 1 }} :</h4>
+                        <p><span class="fas fa-quote-left"></span> {{ quotes[index].quote }}</p>
+                        <p class="text-right">- {{ quotes[index].author }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row justify-content-between">
+                    <div class="col-sm-6 text-sm-right order-sm-last pb-4 pb-sm-0">
+                      <button id="new-quote" class="btn" :style="bgColor" @click="newQuote">
+                        Nouvelles Citations
+                      </button>
+                    </div>
+                    <div class="col-sm-6 text-sm-left order-sm-first">
+                      <button id="return" class="btn" :style="bgColor" @click="exit">
+                        Retour
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- quotes-box -->
+              </div>
+            </div>
+            <!-- row -->
+          </div>
+          <!-- container -->
+        </div>
+      </transition>
+    </div>
+    <!-- app -->
+
+    <script src="./JS/vue.js"></script>
+    <script src="./JS/script.js"></script>
+  </body>
+</html>
